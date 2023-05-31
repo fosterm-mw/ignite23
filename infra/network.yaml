@@ -1,0 +1,141 @@
+---
+apiVersion: compute.gcp.upbound.io/v1beta1
+kind: Network
+metadata:
+  name: primary-network
+spec:
+  providerConfigRef:
+    name: admin
+  deletionPolicy: Delete
+  forProvider:
+    autoCreateSubnetworks: false
+    description: GKE VPC
+    routingMode: GLOBAL
+
+---
+apiVersion: compute.gcp.upbound.io/v1beta1
+kind: Subnetwork
+metadata:
+  name: primary-subnet
+spec:
+  providerConfigRef:
+    name: admin
+  forProvider:
+    ipCidrRange: 10.0.128.0/21
+    networkRef:
+      name: primary-network
+    region: us-central1
+    secondaryIpRange:
+      - ipCidrRange: 240.0.0.0/13
+        rangeName: pods-primary
+      - ipCidrRange: 240.64.0.0/24
+        rangeName: services-primary
+
+---
+apiVersion: compute.gcp.upbound.io/v1beta1
+kind: Firewall
+metadata:
+  name: iap-ingress
+spec:
+  providerConfigRef:
+    name: admin
+  forProvider: 
+    direction: INGRESS
+    allow:
+      - protocol: tcp
+        ports:
+          - "22"
+    networkRef:
+      name: primary-network
+    priority: 1100
+    sourceRanges:
+      - 35.235.240.0/20
+  
+---
+apiVersion: compute.gcp.upbound.io/v1beta1
+kind: Firewall
+metadata:
+  name: master-ingress
+spec:
+  providerConfigRef:
+    name: admin
+  forProvider: 
+    direction: INGRESS
+    allow:
+      - protocol: tcp
+        ports:
+          - "443"
+          - "8443"
+          - "8676"
+    networkRef:
+      name: primary-network
+    priority: 1100
+    sourceRanges:
+      - 10.0.0.0/28
+
+---
+apiVersion: compute.gcp.upbound.io/v1beta1
+kind: Firewall
+metadata:
+  name: allow-egress
+spec:
+  providerConfigRef:
+    name: admin
+  forProvider: 
+    direction: EGRESS
+    allow:
+      - protocol: all
+    networkRef:
+      name: primary-network
+    priority: 65535
+    sourceRanges:
+      - 0.0.0.0/0
+  
+---
+apiVersion: compute.gcp.upbound.io/v1beta1
+kind: Firewall
+metadata:
+  name: deny-ingress
+spec:
+  providerConfigRef:
+    name: admin
+  forProvider: 
+    direction: INGRESS
+    deny:
+      - protocol: all
+    networkRef:
+      name: primary-network
+    priority: 65534
+    sourceRanges:
+      - 0.0.0.0/0
+
+---
+apiVersion: compute.gcp.upbound.io/v1beta1
+kind: Router
+metadata:
+  name: cloud-router
+spec:
+  providerConfigRef:
+    name: admin
+  forProvider:
+    bgp:
+      - asn: 65010
+    networkRef:
+      name: primary-network
+    region: us-central1
+
+---
+apiVersion: compute.gcp.upbound.io/v1beta1
+kind: RouterNAT
+metadata:
+  name: cloud-routernat
+spec:
+  providerConfigRef:
+    name: admin
+  forProvider:
+    natIpAllocateOption: AUTO_ONLY
+    region: us-central1
+    routerRef:
+      name: cloud-router
+    sourceSubnetworkIpRangesToNat: ALL_SUBNETWORKS_ALL_IP_RANGES
+

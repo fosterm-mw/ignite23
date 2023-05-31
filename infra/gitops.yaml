@@ -1,0 +1,115 @@
+---
+apiVersion: helm.crossplane.io/v1beta1
+kind: Release
+metadata:
+  name: demo-argocd
+  annotations:
+    crossplane.io/external-name: argocd
+spec:
+  deletionPolicy: Delete
+  providerConfigRef:
+    name: project-demo-cluster
+  forProvider:
+    chart:
+      name: argo-cd
+      repository: https://argoproj.github.io/argo-helm
+      version: "5.16.1"
+    namespace: argocd
+    values:
+      repoServer:
+        securityContext:
+          seccompProfile:
+            type: Unconfined
+      server:
+        config:
+          kustomize.buildOptions: "--enable-helm"
+          application.resourceTrackingMethod: annotations
+          resource.customizations.health.argoproj.io_Application: |
+            hs = {}
+            hs.status = "Progressing"
+            hs.message = ""
+            if obj.status ~= nil then
+              if obj.status.health ~= nil then
+                hs.status = obj.status.health.status
+                if obj.status.health.message ~= nil then
+                  hs.message = obj.status.health.message
+                end
+              end
+            end
+            return hs
+          statusbadge.enabled: "true"
+          resource.customizations.ignoreDifferences.admissionregistration.k8s.io_MutatingWebhookConfiguration: |
+            jqPathExpressions:
+            - '.webhooks[]?.clientConfig.caBundle'
+          resource.customizations.ignoreDifferences.admissionregistration.k8s.io_ValidatingWebhookConfiguration: |
+            jqPathExpressions:
+            - '.webhooks[]?.clientConfig.caBundle'
+            - '.webhooks[]?.failurePolicy'
+          resource.compareoptions: |
+            ignoreResourceStatusField: crd
+
+
+--- 
+apiVersion: kubernetes.crossplane.io/v1alpha1
+kind: Object
+metadata:
+  name: argocd-platform-project
+spec:
+  deletionPolicy: Delete
+  providerConfigRef:
+    name: admin
+  forProvider:
+    manifest:
+      apiVersion: argoproj.io/v1alpha1
+      kind: AppProject
+      metadata:
+        name: operators
+        namespace: argocd
+        annotations:
+          argocd.argoproj.io/sync-wave: "-100"
+        finalizers:
+          - resources-finalizer.argocd.argoproj.io
+    spec:
+      clusterResourceWhitelist:
+      - group: "*"
+        kind: '*'
+      description: Cluster Operators Project
+      sourceRepos:
+      - '*'
+      destinations:
+      - namespace: '*'
+        server: '*'
+      roles:
+      - name: admin
+        description: Admin privileges to operators
+        policies:
+        - p, proj:operators:admin, applications, *, operators/*, allow
+        groups: []
+
+---
+apiVersion: kubernetes.crossplane.io/v1alpha1
+kind: Object
+metadata:
+  name: argocd-platform-apps
+spec:
+  deletionPolicy: Delete
+  providerConfigRef:
+    name: admin
+  forProvider:
+    manifest:
+      apiVersion: argoproj.io/v1alpha1
+      kind: Application
+      metadata:
+        name: apps
+        namespace: argocd
+        labels:
+          deployment: kustomize
+          name: apps
+          tier: cluster
+        annotations:
+          argocd.argoproj.io/sync-wave: "-200"
+      spec:
+        project: operators
+        source:
+          repoURL: https://
+

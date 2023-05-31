@@ -1,0 +1,15 @@
+# ---
+# apiVersion: gcp.crossplane.io/v1beta1
+# kind: ProviderConfig
+# metadata:
+#   name: admin
+#   namespace: crossplane-system
+# spec:
+#   projectID: test-app-384114
+#   credentials:
+#     source: Secret
+#     secretRef:
+#       key: credentials
+#       name: gcp-default
+#       namespace: crossplane-system
+#

@@ -1,0 +1,25 @@
+---
+apiVersion: cloudplatform.gcp.upbound.io/v1beta1
+kind: ProjectService
+metadata:
+  name: compute-engine-api
+spec:
+  providerConfigRef:
+    name: admin
+  forProvider:
+    disableDependentServices: false
+    project: test-app-384114
+    service: compute.googleapis.com
+
+---
+apiVersion: cloudplatform.gcp.upbound.io/v1beta1
+kind: ProjectService
+metadata:
+  name: kubernetes-engine-api
+spec:
+  providerConfigRef:
+    name: admin
+  forProvider:
+    disableDependentServices: false
+    project: test-app-384114
+    service: container.googleapis.com

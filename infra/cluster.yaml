@@ -1,0 +1,101 @@
+---
+apiVersion: container.gcp.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  labels:
+    demo.igniteme.dev/cluster-id: primary-cluster
+  name: primary-cluster
+spec:
+  providerConfigRef:
+    name: admin
+  writeConnectionSecretToRef:
+    name: project-demo-cluster
+    namespace: crossplane-system
+  forProvider:
+    addonsConfig:
+      - httpLoadBalancing:
+        - disabled: false
+        horizontalPodAutoscaling:
+        - disabled: false
+    location: us-central1
+    networkRef:
+      name: primary-network
+    subnetworkRef:
+      name: primary-subnet
+    privateClusterConfig:
+      - masterIpv4CidrBlock: 172.16.0.0/28
+        enablePrivateNodes: true
+        masterGlobalAccessConfig:
+          - enabled: true
+    enableAutopilot: true
+    ipAllocationPolicy:
+      - clusterIpv4CidrBlock: 10.1.0.0/16
+        # nodeIpv4CidrBlock: 10.0.0.0/24
+        servicesIpv4CidrBlock: 10.2.0.0/20
+        # useIpAliases: true
+    initialNodeCount: 1
+    
+    
+---
+apiVersion: container.gcp.upbound.io/v1beta1
+kind: NodePool
+metadata:
+  name: default-pool
+spec:
+  deletionPolicy: Delete
+  providerConfigRef:
+    name: admin
+  forProvider:
+    autoscaling:
+    - minNodeCount: 1
+      maxNodeCount: 3
+    clusterSelector:
+      matchLabels:
+        demo.igniteme.dev/cluster-id: primary-cluster
+    nodeConfig:
+    - diskType: pd-ssd
+      diskSizeGb: 50
+      machineType: e2-standard-2
+      spot: true
+    initialNodeCount: 1
+
+---
+apiVersion: kubernetes.crossplane.io/v1alpha1
+kind: ProviderConfig
+metadata:
+  name: project-demo-cluster
+  namespace: 
+spec:
+  credentials:
+    source: Secret
+    secretRef:
+      name: project-demo-cluster
+      namespace: crossplane-system
+      key: kubeconfig
+  identity:
+    type: GoogleApplicationCredentials
+    source: Secret
+    secretRef:
+      name: gcp-default
+      namespace: crossplane-system
+      key: credentials
+
+---
+apiVersion: helm.crossplane.io/v1beta1
+kind: ProviderConfig
+metadata:
+  name: project-demo-cluster
+spec:
+  credentials:
+    source: Secret
+    secretRef:
+      name: project-demo-cluster
+      namespace: crossplane-system
+      key: kubeconfig
+  identity:
+    type: GoogleApplicationCredentials
+    source: Secret
+    secretRef:
+      name: gcp-default
+      namespace: crossplane-system
+      key: credentials
