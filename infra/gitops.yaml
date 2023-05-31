@@ -57,7 +57,7 @@ metadata:
 spec:
   deletionPolicy: Delete
   providerConfigRef:
-    name: admin
+    name: project-demo-cluster
   forProvider:
     manifest:
       apiVersion: argoproj.io/v1alpha1
@@ -69,22 +69,22 @@ spec:
           argocd.argoproj.io/sync-wave: "-100"
         finalizers:
           - resources-finalizer.argocd.argoproj.io
-    spec:
-      clusterResourceWhitelist:
-      - group: "*"
-        kind: '*'
-      description: Cluster Operators Project
-      sourceRepos:
-      - '*'
-      destinations:
-      - namespace: '*'
-        server: '*'
-      roles:
-      - name: admin
-        description: Admin privileges to operators
-        policies:
-        - p, proj:operators:admin, applications, *, operators/*, allow
-        groups: []
+      spec:
+        clusterResourceWhitelist:
+        - group: "*"
+          kind: '*'
+        description: Cluster Operators Project
+        sourceRepos:
+        - '*'
+        destinations:
+        - namespace: '*'
+          server: '*'
+        roles:
+        - name: admin
+          description: Admin privileges to operators
+          policies:
+          - p, proj:operators:admin, applications, *, operators/*, allow
+          groups: []
 
 ---
 apiVersion: kubernetes.crossplane.io/v1alpha1
@@ -94,7 +94,7 @@ metadata:
 spec:
   deletionPolicy: Delete
   providerConfigRef:
-    name: admin
+    name: project-demo-cluster
   forProvider:
     manifest:
       apiVersion: argoproj.io/v1alpha1
@@ -111,5 +111,16 @@ spec:
       spec:
         project: operators
         source:
-          repoURL: https://
+          repoURL: https://github.com/fosterm-mw/ignite23.git
+          path: gitops/
+          targetRevision: HEAD
+        destination:
+          server: https://kubernetes.default.svc
+          namespace: argocd
+        syncPolicy:
+          automated:
+            prune: false
+            selfHeal: true
+          syncOptions:
+          - CreateNamespace=true
 
