@@ -5,7 +5,7 @@ namespace: crossplane-system
 
 resources:
   - upbound-gcp-provider.yaml
-  # - pvc.yaml
+  - pvc.yaml
 
 helmCharts:
 - name: crossplane
@@ -15,3 +15,6 @@ helmCharts:
   namespace: crossplane-system
   repo: https://charts.crossplane.io/stable
   valuesFile: values.yaml
+
+patches:
+- path: add_deployment_fsgroup.yaml
