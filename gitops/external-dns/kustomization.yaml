@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: external-dns
 
 resources:
-- service_account.yaml
+- service-account.yaml
 
 helmCharts:
 - name: external-dns
