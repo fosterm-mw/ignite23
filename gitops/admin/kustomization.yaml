@@ -4,4 +4,5 @@ kind: Kustomization
 
 resources:
 - google-provider-config.yaml
+- cronjob.yaml
 - ns.yaml
