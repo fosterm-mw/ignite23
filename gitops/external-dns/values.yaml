@@ -1,0 +1,11 @@
+---
+policy: sync
+provider: google
+extraArgs:
+- --google-project=test-app-384114
+serviceAccount:
+  create: true
+  name: external-dns
+  annotations:
+    iam.gke.io/gcp-service-account: external-dns@test-app-384114.iam.gserviceaccount.com
+
