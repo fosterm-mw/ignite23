@@ -4,7 +4,7 @@ kind: ServiceAccount
 metadata:
   name: upbound-gcp-provider
   annotations:
-    iam.gke.io/gcp-service-account: upbound-gcp-provider@test-app-384114.iam.gserviceaccount.com
+    iam.gke.io/gcp-service-account: platform-admin-crossplane@test-app-384114.iam.gserviceaccount.com
 ---
 apiVersion: v1
 kind: ServiceAccount
