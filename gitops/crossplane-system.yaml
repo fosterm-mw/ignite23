@@ -1,26 +1,26 @@
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: crossplane-system
-#   namespace: argocd
-#   labels:
-#     deployment: kustomization
-#     name: crossplane-system
-#   annotations:
-#     argocd.argoproj.io/sync-wave: "0"
-# spec:
-#   project: operators
-#   source:
-#     repoURL: https://github.com/fosterm-mw/ignite23.git
-#     path: gitops/crossplane-system
-#     targetRevision: HEAD
-#   destination:
-#     server: https://kubernetes.default.svc
-#     namespace: crossplane-system
-#   syncPolicy:
-#     automated:
-#       prune: false
-#       selfHeal: true
-#     syncOptions:
-#     - CreateNamespace=true
-#   
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: crossplane-system
+  namespace: argocd
+  labels:
+    deployment: kustomization
+    name: crossplane-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+spec:
+  project: operators
+  source:
+    repoURL: https://github.com/fosterm-mw/ignite23.git
+    path: gitops/crossplane-system
+    targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: crossplane-system
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  
