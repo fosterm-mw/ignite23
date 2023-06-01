@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: backstage
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-100"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  description: Backstage Project
+  sourceRepos:
+  - '*'
+  destinations:
+  - namespace: backstage
+    server: '*'
+  roles:
+  - name: admin
+    description: Admin privleges to backstage
+    policies:
+    - p, proj:backstage:admin, applications, *, backstage/*, allow
+    groups: []

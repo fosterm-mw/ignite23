@@ -1,0 +1,5 @@
+---
+packageCache:
+  medium: "crossplane"
+  sizeLimit: 5Gi
+  pvc: "crossplane"

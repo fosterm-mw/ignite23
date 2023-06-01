@@ -1,0 +1,40 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: backstage-dev
+  namespace: argocd
+  labels:
+    deployment: kustomize
+    name: backstage-dev
+    tier: tenant
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/fosterm-mw/backstage-deploy.git
+      revision: HEAD
+      files:
+      - path: apps/dev/**/config.yaml
+  template:
+    metadata:
+      name: "{{path.basename}}-dev"
+      labels:
+        deployment: kustomize
+        name: "{{path.basename}}-dev"
+        tier: tenant
+    spec:
+      project: backstage
+      source:
+        repoURL: https://github.com/fosterm-mw/backstage-deploy.git
+        path: "{{app.path}}"
+        targetRevision: HEAD
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: backstage
+      syncPolicy:
+        automated:
+          prune: false
+          selfHeal: true
+
