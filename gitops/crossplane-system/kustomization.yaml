@@ -4,14 +4,14 @@ kind: Kustomization
 namespace: crossplane-system
 
 resources:
-#   - upbound-gcp-provider.yaml
-#   - pvc.yaml
-#
-# helmCharts:
-# - name: crossplane
-#   releaseName: crossplane
-#   includeCRDs: true
-#   version: 1.11.2
-#   namespace: crossplane-system
-#   repo: https://charts.crossplane.io/stable
-#   valuesFile: values.yaml
+  - upbound-gcp-provider.yaml
+  - pvc.yaml
+
+helmCharts:
+- name: crossplane
+  releaseName: crossplane
+  includeCRDs: true
+  version: 1.11.2
+  namespace: crossplane-system
+  repo: https://charts.crossplane.io/stable
+  valuesFile: values.yaml
