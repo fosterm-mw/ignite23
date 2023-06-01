@@ -1,0 +1,49 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: admin-credentials-sync
+  namespace: admin
+spec:
+  suspend: false
+  schedule: "*/45 * * * *"
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 1
+  concurrencyPolicy: Forbid
+  startingDeadlineSeconds: 1800
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName:  gcp-auth
+          restartPolicy: Never
+          containers:
+            - image: google/cloud-sdk:debian_component_based
+              name: create-access-token
+              imagePullPolicy: IfNotPresent
+              livenessProbe:
+                exec:
+                  command:
+                  - gcloud
+                  - version
+              readinessProbe:
+                exec:
+                  command:
+                  - gcloud
+                  - version
+              env:
+                - name: SECRET_NAME
+                  value: gcp-creds
+                - name: SECRET_KEY
+                  value: credentials
+              command:
+                - /bin/bash
+                - -ce
+                - kubectl create secret generic $SECRET_NAME --dry-run=client --from-literal=$SECRET_KEY=$(gcloud auth print-access-token) -o yaml | kubectl apply -f -
+              resources:
+                requests:
+                  cpu: 250m
+                  memory: 256Mi
+                limits:
+                  cpu: 500m
+                  memory: 512Mi
