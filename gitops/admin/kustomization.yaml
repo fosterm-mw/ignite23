@@ -4,4 +4,4 @@ kind: Kustomization
 
 resources:
 - google-provider-config.yaml
-- ns.yaml
+# - ns.yaml
