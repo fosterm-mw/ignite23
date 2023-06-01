@@ -89,6 +89,6 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
-  controllerConfigRef:
-    name: upbound-gcp-provider
+  # controllerConfigRef:
+  #   name: upbound-gcp-provider
   package: xpkg.upbound.io/upbound/provider-gcp:v0.32.0
