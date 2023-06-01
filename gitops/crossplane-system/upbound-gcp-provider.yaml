@@ -94,4 +94,4 @@ metadata:
 spec:
   controllerConfigRef:
     name: upbound-gcp-provider
-  package: xpkg.upbound.io/upbound/provider-gcp:v0.30.0
+  package: ghcr.io/mavenwave-devops/upbound/provider-gcp:v0.30.1
