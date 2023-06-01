@@ -11,7 +11,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: argocd.igniteme.dev
+  - host: argocd.onecloud.igniteme.dev
     http:
       paths:
       - path: /

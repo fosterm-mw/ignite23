@@ -1,0 +1,13 @@
+---
+apiVersion: dns.gcp.upbound.io/v1beta1
+kind: ManagedZone
+metadata:
+  name: igniteme-dev
+  annotations:
+    crossplane.io/external-name: igniteme-dev
+spec:
+  deletionPolicy: Delete
+  providerConfigRef:
+    name: admin
+  forProvider:
+    dnsName: onecloud.igniteme.dev.
