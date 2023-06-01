@@ -85,6 +85,7 @@
 #       cpu: 1000m
 #       memory: 1Gi
 # ---
+
 apiVersion: pkg.crossplane.io/v1
 kind: Provider
 metadata:
@@ -92,6 +93,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
-  package: xpkg.upbound.io/upbound/provider-gcp:v0.30.1
+  package: xpkg.upbound.io/upbound/provider-gcp:v0.30.0
+
   # controllerConfigRef:
   #   name: upbound-gcp-provider
