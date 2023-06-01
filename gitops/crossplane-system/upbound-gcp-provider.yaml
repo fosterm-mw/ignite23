@@ -1,0 +1,94 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: upbound-gcp-provider
+  annotations:
+    iam.gke.io/gcp-service-account: upbound-gcp-provider@test-app-384114.iam.gserviceaccount.com
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: upbound-gcp-provider-setup
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: upbound-gcp-provider-setup
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: upbound-gcp-provider-setup
+  namespace: crossplane-system
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: upbound-gcp-provider-setup
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  template:
+    spec:
+      serviceAccountName: upbound-gcp-provider-setup
+      containers:
+      - image: bitnami/kubectl
+        name: upbound-gcp-provider-setup
+        command:
+        - /bin/bash
+        - -c
+        - |-
+          export PROVIDER=$(kubectl get providers.pkg.crossplane.io upbound-gcp-provider -o jsonpath='{.status.currentRevision}')
+          cat <<EOF | kubectl apply -f -
+          apiVersion: rbac.authorization.k8s.io/v1
+          kind: ClusterRoleBinding
+          metadata:
+            name: crossplane:provider:$PROVIDER:workload-identity
+          roleRef:
+            apiGroup: rbac.authorization.k8s.io
+            kind: ClusterRole
+            name: crossplane:provider:$PROVIDER:system
+          subjects:
+          - kind: ServiceAccount
+            name: upbound-gcp-provider
+            namespace: crossplane-system
+          EOF
+        resources: {}
+      restartPolicy: Never
+---
+apiVersion: pkg.crossplane.io/v1alpha1
+kind: ControllerConfig
+metadata:
+  name: upbound-gcp-provider
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  serviceAccountName: upbound-gcp-provider
+  resources:
+    limits:
+      cpu: 2000m
+      memory: 2Gi
+    requests:
+      cpu: 1000m
+      memory: 1Gi
+---
+apiVersion: pkg.crossplane.io/v1alpha1
+kind: Provider
+metadata:
+  name: upbound-gcp-provider
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  controllerConfigRef:
+    name: upbound-gcp-provider
+  package: xpkg.upbound.io/upbound/provider-gcp:v0.32.0
