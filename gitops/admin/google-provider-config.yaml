@@ -1,0 +1,9 @@
+---
+apiVersion: gcp.upbound.io/v1beta1
+kind: ProviderConfig
+metadata:
+  name: admin
+spec:
+  credentials:
+    source: InjectedIdentity
+  projectID: test-app-384114
