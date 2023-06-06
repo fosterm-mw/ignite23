@@ -5,7 +5,7 @@ namespace: argocd
 
 resources:
 - ingress.yaml
-# - argocd_service_account.yaml
+- argocd_service_account.yaml
 # - secret_manager.yaml
 # - secret_store.yaml
 # - secret.yaml
