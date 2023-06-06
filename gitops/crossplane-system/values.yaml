@@ -3,3 +3,17 @@ packageCache:
   medium: "crossplane"
   sizeLimit: 5Gi
   pvc: "crossplane"
+resourcesCrossplane:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 100m
+    memory: 256Mi
+resourcesRBACManager:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 100m
+    memory: 256Mi
