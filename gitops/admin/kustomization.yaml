@@ -3,6 +3,6 @@ kind: Kustomization
 
 
 resources:
+- ns.yaml
 - google-provider-config.yaml
 - cronjob.yaml
-- ns.yaml
