@@ -30,7 +30,6 @@ kind: RoleBinding
 metadata:
   name: admins-rb
 roleRef:
-  apiGroupt: rbac.authorization.k8s.io
   kind: Role
   name: admin
 subjects:
