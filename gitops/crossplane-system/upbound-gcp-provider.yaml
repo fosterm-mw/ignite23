@@ -78,8 +78,8 @@ metadata:
     iam.gke.io/gcp-service-account: platform-admin-crossplane@test-app-384114.iam.gserviceaccount.com
 spec:
   serviceAccountName: admin
-  impersonateServiceAccount:
-    name: admin
+  # impersonateServiceAccount:
+  #   name: admin
   resources:
     limits:
       cpu: 2000m
