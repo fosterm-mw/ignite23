@@ -15,7 +15,7 @@ spec:
     spec:
       template:
         spec:
-          serviceAccountName:  gcp-auth
+          serviceAccountName:  admin
           restartPolicy: Never
           containers:
             - image: google/cloud-sdk:debian_component_based
