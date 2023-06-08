@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: upbound-gcp-provider
+  name: admin
   annotations:
     iam.gke.io/gcp-service-account: platform-admin-crossplane@test-app-384114.iam.gserviceaccount.com
 ---
@@ -30,7 +30,7 @@ subjects:
   name: upbound-gcp-provider-setup
   namespace: crossplane-system
 - kind: ServiceAccount
-  name: upbound-gcp-provider
+  name: admin
   namespace: crossplane-system
 ---
 apiVersion: batch/v1
@@ -51,7 +51,7 @@ spec:
         - /bin/bash
         - -c
         - |-
-          export PROVIDER=$(kubectl get providers.pkg.crossplane.io upbound-gcp-provider -o jsonpath='{.status.currentRevision}')
+          export PROVIDER=$(kubectl get providers.pkg.crossplane.io admin -o jsonpath='{.status.currentRevision}')
           cat <<EOF | kubectl apply -f -
           apiVersion: rbac.authorization.k8s.io/v1
           kind: ClusterRoleBinding
@@ -63,7 +63,7 @@ spec:
             name: crossplane:provider:$PROVIDER:system
           subjects:
           - kind: ServiceAccount
-            name: upbound-gcp-provider
+            name: admin
             namespace: crossplane-system
           EOF
         resources: {}
@@ -76,7 +76,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
-  serviceAccountName: upbound-gcp-provider
+  serviceAccountName: admin
   resources:
     limits:
       cpu: 2000m
