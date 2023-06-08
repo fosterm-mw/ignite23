@@ -3,7 +3,7 @@ kind: GlobalAddress
 metadata:
   name: argocd-address
   annotations:
-    crossplane.io/external-name: igniteme-dev-globalip
+    crossplane.io/external-name: argocd-igniteme-dev-globalip
 spec:
   deletionPolicy: Delete
   providerConfigRef:
