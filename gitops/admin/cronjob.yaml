@@ -6,7 +6,7 @@ metadata:
   namespace: admin
 spec:
   suspend: false
-  schedule: "*/5 * * * *"
+  schedule: "*/45 * * * *"
   failedJobsHistoryLimit: 1
   successfulJobsHistoryLimit: 1
   concurrencyPolicy: Forbid
