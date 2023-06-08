@@ -1,0 +1,31 @@
+apiVersion: compute.gcp.upbound.io/v1beta1
+kind: GlobalAddress
+metadata:
+  name: argocd-address
+  annotations:
+    crossplane.io/external-name: igniteme-dev-globalip
+spec:
+  deletionPolicy: Delete
+  providerConfigRef:
+    name: admin
+  forProvider:
+    addressType: EXTERNAL
+---
+# apiVersion: dns.gcp.upbound.io/v1beta1
+# kind: RecordSet
+# metadata:
+#   name: argocd-records
+#   annotations:
+#     crossplane.io/external-name: argocd-records
+# spec:
+#   deletionPolicy: Delete
+#   providerConfigRef:
+#     name: admin
+#   forProvider:
+#     managedZoneRef: 
+#       name: igniteme-dev
+#     name: argocd.onecloud.igniteme.dev.
+#     type: "A"
+#     rrdatas: 
+#       - "35.186.207.49"
+#     ttl: 86400

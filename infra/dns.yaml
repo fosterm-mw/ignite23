@@ -1,3 +1,34 @@
+apiVersion: compute.gcp.upbound.io/v1beta1
+kind: GlobalAddress
+metadata:
+  name: backstage-address
+  annotations:
+    crossplane.io/external-name: igniteme-dev-globalip
+spec:
+  deletionPolicy: Delete
+  providerConfigRef:
+    name: admin
+  forProvider:
+    addressType: EXTERNAL
+---
+apiVersion: dns.gcp.upbound.io/v1beta1
+kind: RecordSet
+metadata:
+  name: backstage-records
+  annotations:
+    crossplane.io/external-name: backstage-records
+spec:
+  deletionPolicy: Delete
+  providerConfigRef:
+    name: admin
+  forProvider:
+    managedZoneRef: 
+      name: igniteme-dev
+    name: backstage.onecloud.igniteme.dev.
+    type: "A"
+    rrdatas: 
+      - "35.186.207.49"
+    ttl: 86400
 ---
 apiVersion: dns.gcp.upbound.io/v1beta1
 kind: ManagedZone
