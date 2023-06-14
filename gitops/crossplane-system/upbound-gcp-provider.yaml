@@ -97,4 +97,4 @@ metadata:
 spec:
   controllerConfigRef:
     name: upbound-gcp-provider
-    package: us-central1-docker.pkg.dev/test-app-384114/crossplane/crossplane:latest
+  package: us-central1-docker.pkg.dev/test-app-384114/crossplane/crossplane:latest
