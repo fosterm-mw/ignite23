@@ -7,4 +7,5 @@ spec:
   credentials:
     impersonateServiceAccount:
       name: platform-admin-crossplane@test-app-384114.iam.gserviceaccount.com
+    source: ImpersonateServiceAccount
   projectID: test-app-384114
