@@ -164,8 +164,8 @@ destroy_dev_cluster:
 
 .PHONY: create_infra
 create_infra:
-	${KUBECTL} apply -f ${MKFILEDIR}infra
+	${KUBECTL} apply -k ${MKFILEDIR}infra
 
 .PHONY: destroy_infra
 destroy_infra:
-	${KUBECTL} delete -f ${MKFILEDIR}infra
+	${KUBECTL} delete -k ${MKFILEDIR}infra

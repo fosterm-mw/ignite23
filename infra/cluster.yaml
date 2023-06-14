@@ -27,13 +27,13 @@ spec:
         enablePrivateNodes: true
         masterGlobalAccessConfig:
           - enabled: true
-    enableAutopilot: true
+    # enableAutopilot: true
     ipAllocationPolicy:
       - clusterIpv4CidrBlock: 10.1.0.0/16
         # nodeIpv4CidrBlock: 10.0.0.0/24
         servicesIpv4CidrBlock: 10.2.0.0/20
         # useIpAliases: true
-    initialNodeCount: 1
+    initialNodeCount: 2
     
     
 ---
@@ -57,7 +57,7 @@ spec:
       diskSizeGb: 50
       machineType: e2-standard-2
       spot: true
-    initialNodeCount: 1
+    initialNodeCount: 2
 
 ---
 apiVersion: kubernetes.crossplane.io/v1alpha1

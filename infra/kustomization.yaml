@@ -8,4 +8,4 @@ resources:
   - cluster.yaml
   - platform-admin.yaml
   - gitops.yaml
-  - gitops-repo-secret.yaml
+  # - gitops-repo-secret.yaml
