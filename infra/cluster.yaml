@@ -48,7 +48,7 @@ spec:
   forProvider:
     autoscaling:
     - minNodeCount: 1
-      maxNodeCount: 3
+      maxNodeCount: 5
     clusterSelector:
       matchLabels:
         demo.igniteme.dev/cluster-id: primary-cluster
@@ -57,7 +57,7 @@ spec:
       diskSizeGb: 50
       machineType: e2-standard-2
       spot: true
-    initialNodeCount: 2
+    initialNodeCount: 3
 
 ---
 apiVersion: kubernetes.crossplane.io/v1alpha1
