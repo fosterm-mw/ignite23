@@ -1,0 +1,15 @@
+apiVersion: cloudbuild.gcp.upbound.io/v1beta1
+kind: Trigger
+metadata:
+  name: backstage
+spec:
+  providerConfigRef:
+    name: platform-admin
+  forProvider:
+    name: backstage-container
+    filename: ./cloudbuild.yaml
+    github:
+    - name: mayo-backstage-dev
+      owner: MavenWave-DevOps
+      push:
+      - branch: main

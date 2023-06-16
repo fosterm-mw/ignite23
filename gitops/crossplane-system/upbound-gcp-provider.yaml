@@ -78,8 +78,6 @@ metadata:
     iam.gke.io/gcp-service-account: platform-admin-crossplane@test-app-384114.iam.gserviceaccount.com
 spec:
   serviceAccountName: admin
-  # impersonateServiceAccount:
-  #   name: admin
   resources:
     limits:
       cpu: 2000m
@@ -97,4 +95,5 @@ metadata:
 spec:
   controllerConfigRef:
     name: upbound-gcp-provider
-  package: us-central1-docker.pkg.dev/test-app-384114/crossplane/crossplane:latest
+  package: xpkg.upbound.io/upbound/provider-gcp:v0.33.0
+  # package: us-central1-docker.pkg.dev/test-app-384114/crossplane/crossplane:latest
