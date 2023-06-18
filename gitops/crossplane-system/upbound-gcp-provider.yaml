@@ -4,7 +4,8 @@ kind: ServiceAccount
 metadata:
   name: admin
   annotations:
-    iam.gke.io/gcp-service-account: platform-admin-crossplane@test-app-384114.iam.gserviceaccount.com
+    iam.gke.io/gcp-service-account: 640263954415-compute@developer.gserviceaccount.com
+    # iam.gke.io/gcp-service-account: platform-admin-crossplane@test-app-384114.iam.gserviceaccount.com
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -75,7 +76,8 @@ metadata:
   name: upbound-gcp-provider
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
-    iam.gke.io/gcp-service-account: platform-admin-crossplane@test-app-384114.iam.gserviceaccount.com
+    # iam.gke.io/gcp-service-account: platform-admin-crossplane@test-app-384114.iam.gserviceaccount.com
+    iam.gke.io/gcp-service-account: 640263954415-compute@developer.gserviceaccount.com
 spec:
   serviceAccountName: admin
   resources:
