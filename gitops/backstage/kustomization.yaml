@@ -3,7 +3,7 @@ kind: Kustomization
 
 resources:
 - secret.yaml
-- rbac.yaml
-- project.yaml
-- trigger.yaml
+# - rbac.yaml
+# - project.yaml
+# - trigger.yaml
 # - backstage-app.yaml
