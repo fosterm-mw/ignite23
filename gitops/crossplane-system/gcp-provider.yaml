@@ -1,0 +1,26 @@
+---
+apiVersion: pkg.crossplane.io/v1alpha1
+kind: ControllerConfig
+metadata:
+  name: gcp-provider
+spec:
+  securityContext:
+    allowPriviledgeEscalation: false
+    capabilities:
+      drop:
+      - ALL
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+    runAsUser: 1000
+  serviceAccountName: 640263954415-compute@developer.gserviceaccount.com
+---
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  name: gcp-provider
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  package: xpkg.upbound.io/upbound/provider-gcp:v0.33.0
+  controllerConfigRef:
+    name: gcp-provider
