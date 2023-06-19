@@ -29,13 +29,15 @@ spec:
         enablePrivateNodes: true
         masterGlobalAccessConfig:
           - enabled: true
-    enableAutopilot: true
+    # enableAutopilot: true
     ipAllocationPolicy:
       - clusterIpv4CidrBlock: 10.1.0.0/16
         # nodeIpv4CidrBlock: 10.0.0.0/24
         servicesIpv4CidrBlock: 10.2.0.0/20
         # useIpAliases: true
     initialNodeCount: 1
+    workloadIdentityConfig:
+    - workloadPool: test-app-384114.svc.id.goog
     
     
 ---
@@ -50,7 +52,7 @@ spec:
   forProvider:
     autoscaling:
     - minNodeCount: 1
-      maxNodeCount: 5
+      maxNodeCount: 8
     clusterSelector:
       matchLabels:
         demo.igniteme.dev/cluster-id: primary-cluster
