@@ -5,7 +5,7 @@ metadata:
   name: gcp-provider
 spec:
   securityContext:
-    allowPriviledgeEscalation: false
+    allowPrivilegeEscalation: false
     capabilities:
       drop:
       - ALL
