@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: configconnector
+  namespace: argocd
+  labels:
+    deployment: kustomization
+    name: configconnector
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+spec:
+  project: operators
+  source:
+    repoURL: https://github.com/fosterm-mw/ignite23.git
+    path: gitops/configconnector
+    targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: configconnector
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  
