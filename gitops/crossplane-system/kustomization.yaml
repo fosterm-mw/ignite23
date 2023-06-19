@@ -4,9 +4,9 @@ kind: Kustomization
 namespace: crossplane-system
 
 resources:
-  # - upbound-gcp-provider.yaml
-  # - pvc.yaml
-- gcp-provider.yaml
+  - upbound-gcp-provider.yaml
+  - pvc.yaml
+# - gcp-provider.yaml
 
 helmCharts:
 - name: crossplane
@@ -17,5 +17,5 @@ helmCharts:
   repo: https://charts.crossplane.io/stable
   valuesFile: values.yaml
 
-# patches:
-# - path: add_deployment_fsgroup.yaml
+patches:
+- path: add_deployment_fsgroup.yaml
