@@ -80,6 +80,15 @@ metadata:
     iam.gke.io/gcp-service-account: 640263954415-compute@developer.gserviceaccount.com
 spec:
   serviceAccountName: admin
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+      - ALL
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+    runAsUser: 1000
+  serviceAccountName: 640263954415-compute@developer.gserviceaccount.com
   resources:
     limits:
       cpu: 2000m
