@@ -17,6 +17,8 @@ spec:
         - disabled: false
         horizontalPodAutoscaling:
         - disabled: false
+        configConnectorConfig:
+        - enabled: true
     location: us-central1
     networkRef:
       name: primary-network
