@@ -5,5 +5,5 @@ resources:
 - secret.yaml
 # - rbac.yaml
 # - project.yaml
-# - trigger.yaml
+- trigger.yaml
 # - backstage-app.yaml
