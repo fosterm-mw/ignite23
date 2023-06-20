@@ -27,4 +27,39 @@ spec:
         ports:
         - name: backstage
           containerPort: 7007
+      env:
+        - name: GITHUB_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: backstage-secrets
+              key: AUTH_GITHUB_CLIENT_ID
+        - name: GITHUB_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: backstage-secrets
+              key: AUTH_GITHUB_CLIENT_SECRET
+        - name: GITHUB_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: backstage-secrets
+              key: GITHUB_TOKEN
+        - name: AUTH_GOOGLE_CLIENT_ID 
+          valueFrom:
+            secretKeyRef:
+              name: backstage-secrets
+              key: AUTH_GOOGLE_CLIENT_ID
+        - name: AUTH_GOOGLE_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: backstage-secrets
+              key: AUTH_GOOGLE_CLIENT_SECRET
 
+      - name: cloud-sql-proxy
+        image: gcr.io/cloudsql-docker/gce-proxy:1.28.0
+        command:
+          - "/cloud_sql_proxy"
+          - "-ip_address_types=PRIVATE"
+          - "-log_debug_stdout"
+          - "-instances=test-app-384114:us-central1:app1-instance=tcp:5432"
+        securityContext:
+          runAsNonRoot: true

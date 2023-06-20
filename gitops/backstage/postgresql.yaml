@@ -1,43 +1,53 @@
----
-apiVersion: compute.gcp.upbound.io/v1beta1
-kind: Network
-metadata:
-  name: backstage-database-network
-  # labels:
-  #   network.core.projectx.dev/network-ref: database-demo
-spec:
-  providerConfigRef:
-    name: platform-admin
-  forProvider:
-    autoCreateSubnetworks: false
-    routingMode: GLOBAL
+# ---
+# apiVersion: compute.gcp.upbound.io/v1beta1
+# kind: Network
+# metadata:
+#   name: backstage-database-network
+#   # labels:
+#   #   network.core.projectx.dev/network-ref: database-demo
+# spec:
+#   providerConfigRef:
+#     name: platform-admin
+#   forProvider:
+#     autoCreateSubnetworks: false
+#     routingMode: GLOBAL
 ---
 apiVersion: compute.gcp.upbound.io/v1beta1
 kind: GlobalAddress
 metadata:
   name: backstage-database
-  labels:
-    network.core.projectx.dev/globalAddress-ref: backstage-database
 spec:
   providerConfigRef:
     name: platform-admin
   forProvider:
-    networkRef:
-      name: backstage-database-network
+    network: projects/test-app-384114/global/networks/primary-network
     purpose: VPC_PEERING
     addressType: INTERNAL
     prefixLength: 16
+  writeConnectionSecretToRef:
+    name: postgres-connection-ref
+    namespace: backstage
+---
+apiVersion: servicenetworking.gcp.crossplane.io/v1beta1
+kind: Connection
+metadata:
+  name: postgres-connect
+spec:
+  providerConfigRef:
+    name: platform-admin
+  forProvider:
+    network: projects/test-app-384114/global/networks/primary-network
+    parent: services/servicenetworking.googleapis.com
+    reservedPeeringRanges: 
+      - postgres
+  writeConnectionSecretToRef:
+    name: postgres-connection-ref
+    namespace: backstage
 ---
 apiVersion: sql.gcp.upbound.io/v1beta1
 kind: DatabaseInstance
 metadata:
   name: backstage-database-instance
-  # annotations:
-  #   meta.upbound.io/example-id: bigquery/v1beta1/connection
-  #   uptest.upbound.io/pre-delete-hook: testhooks/delete-user.sh
-  # labels:
-  #   testing.upbound.io/example-name: instance
-  # name: example-instance-${Rand.RFC1123Subdomain}
 spec:
   deletionPolicy: Delete
   providerConfigRef:
@@ -46,6 +56,9 @@ spec:
     databaseVersion: POSTGRES_11
     deletionProtection: false
     region: us-central1
+    ipConfiguration:
+      ipv4Enabled: true
+      privateNetwork: projects/test-app-384114/global/networks/primary-network
     settings:
       - tier: db-f1-micro
         diskType: PD_SSD
