@@ -6,6 +6,6 @@ resources:
 # - argocd.yaml
 - backstage.yaml
 - configconnector.yaml
-# - crossplane-system.yaml
+- crossplane-system.yaml
 # - external-dns.yaml
 # - external-secrets.yaml
