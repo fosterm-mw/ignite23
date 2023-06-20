@@ -4,9 +4,9 @@ kind: Kustomization
 resources:
 - secret.yaml
 # - rbac.yaml
-- project.yaml
+# - project.yaml
 - trigger.yaml
-- backstage-app.yaml
+# - backstage-app.yaml
 - postgresql.yaml
 - apis.yaml
 # - deployment.yaml

@@ -18,7 +18,7 @@ spec:
 apiVersion: servicenetworking.gcp.crossplane.io/v1beta1
 kind: Connection
 metadata:
-  name: postgres-connect
+  name: backstage-connect
 spec:
   providerConfigRef:
     name: platform-admin
