@@ -63,3 +63,4 @@ spec:
           - "-instances=test-app-384114:us-central1:app1-instance=tcp:5432"
         securityContext:
           runAsNonRoot: true
+

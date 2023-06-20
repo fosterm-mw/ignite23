@@ -9,4 +9,4 @@ resources:
 - backstage-app.yaml
 - postgresql.yaml
 - apis.yaml
-- deployment.yaml
+# - deployment.yaml
