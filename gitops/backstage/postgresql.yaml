@@ -1,16 +1,3 @@
-# ---
-# apiVersion: compute.gcp.upbound.io/v1beta1
-# kind: Network
-# metadata:
-#   name: backstage-database-network
-#   # labels:
-#   #   network.core.projectx.dev/network-ref: database-demo
-# spec:
-#   providerConfigRef:
-#     name: platform-admin
-#   forProvider:
-#     autoCreateSubnetworks: false
-#     routingMode: GLOBAL
 ---
 apiVersion: compute.gcp.upbound.io/v1beta1
 kind: GlobalAddress
@@ -66,10 +53,6 @@ spec:
 apiVersion: sql.gcp.upbound.io/v1beta1
 kind: Database
 metadata:
-  # annotations:
-  #   meta.upbound.io/example-id: bigquery/v1beta1/connection
-  # labels:
-  #   testing.upbound.io/example-name: db
   name: backstage-database
 spec:
   providerConfigRef:
@@ -77,17 +60,10 @@ spec:
   forProvider:
     instanceRef:
       name: backstage-database-instance
-    # instanceSelector:
-    #   matchLabels:
-    #     testing.upbound.io/example-name: instance
 ---
 apiVersion: sql.gcp.upbound.io/v1beta1
 kind: User
 metadata:
-  # annotations:
-  #   meta.upbound.io/example-id: sql/v1beta1/user
-  # labels:
-  #   testing.upbound.io/example-name: example_user
   name: postgres
 spec:
   providerConfigRef:
@@ -95,12 +71,7 @@ spec:
   forProvider:
     instanceRef:
       name: backstage-database-instance
-    # instanceSelector:
-    #   matchLabels:
-    #     testing.upbound.io/example-name: example_instance
     passwordSecretRef:
       key: password
       name: database-password
       namespace: crossplane-system
-
-
