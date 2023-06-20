@@ -18,12 +18,14 @@ spec:
         horizontalPodAutoscaling:
         - disabled: false
         configConnectorConfig:
-        - enabled: true
+        - enabled: false
     location: us-central1
     networkRef:
       name: primary-network
     subnetworkRef:
       name: primary-subnet
+    verticalPodAutoscaling:
+    - enabled: true
     privateClusterConfig:
       - masterIpv4CidrBlock: 172.16.0.0/28
         enablePrivateNodes: true
@@ -52,7 +54,7 @@ spec:
   forProvider:
     autoscaling:
     - minNodeCount: 1
-      maxNodeCount: 8
+      maxNodeCount: 10
     clusterSelector:
       matchLabels:
         demo.igniteme.dev/cluster-id: primary-cluster

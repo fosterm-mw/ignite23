@@ -27,6 +27,21 @@ spec:
     member: serviceAccount:test-app-384114.svc.id.goog[platform-admin/gcp-auth]
 
 ---
+#Set up impersonate service account 
+apiVersion: cloudplatform.gcp.upbound.io/v1beta1
+kind: ServiceAccountIAMMember
+metadata:
+  name: platform-admin-crossplane-impersonate
+spec:
+  providerConfigRef:
+    name: admin
+  forProvider:
+    serviceAccountIdRef:
+      name: platform-admin-crossplane
+    role: "roles/iam.serviceAccountTokenCreator"
+    member: serviceAccount:infra-tfe-sa@infra-tfe.iam.gserviceaccount.com
+
+---
 apiVersion: cloudplatform.gcp.upbound.io/v1beta1
 kind: ProjectIAMMember
 metadata:
