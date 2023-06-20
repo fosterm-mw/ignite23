@@ -1,0 +1,30 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backstage-deployment
+  namespace: backstage
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backstage
+  template:
+    metadata:
+      labels:
+        app: backstage
+    spec:
+      serviceAccountName: backstage
+      containers:
+      - name: backstage
+        command: ["node"]
+        args:
+        - "packages/backend"
+        - "--config"
+        - "app-config.yaml"
+        image: us.gcr.io/test-app-384114/mayo-backstage:latest
+        imagePullPolicy: Always
+        ports:
+        - name: backstage
+          containerPort: 7007
+
