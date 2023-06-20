@@ -24,7 +24,6 @@ spec:
     name: platform-admin
   forProvider:
     network: projects/test-app-384114/global/networks/primary-network
-    parent: services/servicenetworking.googleapis.com
     reservedPeeringRangesRefs: 
       name: backstage-database
     service: servicenetworking.googleapis.com
