@@ -1,16 +1,16 @@
-# ---
-# apiVersion: compute.gcp.upbound.io/v1beta1
-# kind: Network
-# metadata:
-#   name: backstage-database
-#   labels:
-#     network.core.projectx.dev/network-ref: database-demo
-# spec:
-#   providerConfigRef:
-#     name: platform-admin
-#   forProvider:
-#     autoCreateSubnetworks: false
-#     routingMode: GLOBAL
+---
+apiVersion: compute.gcp.upbound.io/v1beta1
+kind: Network
+metadata:
+  name: backstage-database-network
+  # labels:
+  #   network.core.projectx.dev/network-ref: database-demo
+spec:
+  providerConfigRef:
+    name: platform-admin
+  forProvider:
+    autoCreateSubnetworks: false
+    routingMode: GLOBAL
 ---
 apiVersion: compute.gcp.upbound.io/v1beta1
 kind: GlobalAddress
@@ -23,7 +23,7 @@ spec:
     name: platform-admin
   forProvider:
     networkRef:
-      name: primary-network
+      name: backstage-database-network
     purpose: VPC_PEERING
     addressType: INTERNAL
     prefixLength: 16
