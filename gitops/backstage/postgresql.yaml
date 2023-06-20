@@ -3,6 +3,8 @@ apiVersion: compute.gcp.upbound.io/v1beta1
 kind: GlobalAddress
 metadata:
   name: backstage-database
+  labels:
+    projectx.upbound.io/address: backstage
 spec:
   providerConfigRef:
     name: platform-admin
@@ -24,8 +26,11 @@ spec:
     name: platform-admin
   forProvider:
     network: projects/test-app-384114/global/networks/primary-network
-    reservedPeeringRangesRefs: 
-    - name: backstage-database
+    reservedPeeringRangesSelector:
+      matchLabels:
+        projectx.upbound.io/address: backstage
+    # reservedPeeringRangesRefs: 
+    # - name: backstage-database
     service: servicenetworking.googleapis.com
   # writeConnectionSecretToRef:
   #   name: postgres-connection-ref
