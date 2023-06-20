@@ -25,7 +25,7 @@ spec:
   forProvider:
     network: projects/test-app-384114/global/networks/primary-network
     reservedPeeringRangesRefs: 
-      name: backstage-database
+    - name: backstage-database
     service: servicenetworking.googleapis.com
   # writeConnectionSecretToRef:
   #   name: postgres-connection-ref
