@@ -68,24 +68,24 @@ spec:
           EOF
         resources: {}
       restartPolicy: Never
----
-apiVersion: pkg.crossplane.io/v1alpha1
-kind: ControllerConfig
-metadata:
-  name: upbound-gcp-provider
-  annotations:
-    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
-    iam.gke.io/gcp-service-account: platform-admin-crossplane@test-app-384114.iam.gserviceaccount.com
-spec:
-  serviceAccountName: admin
-  securityContext:
-    allowPrivilegeEscalation: false
-    capabilities:
-      drop:
-      - ALL
-    readOnlyRootFilesystem: true
-    runAsNonRoot: true
-    runAsUser: 1000
+# ---
+# apiVersion: pkg.crossplane.io/v1alpha1
+# kind: ControllerConfig
+# metadata:
+#   name: upbound-gcp-provider
+#   annotations:
+#     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+#     iam.gke.io/gcp-service-account: platform-admin-crossplane@test-app-384114.iam.gserviceaccount.com
+# spec:
+#   serviceAccountName: admin
+#   securityContext:
+#     allowPrivilegeEscalation: false
+#     capabilities:
+#       drop:
+#       - ALL
+#     readOnlyRootFilesystem: true
+#     runAsNonRoot: true
+#     runAsUser: 1000
   # serviceAccountName: platform-admin-crossplane@test-app-384114.iam.gserviceaccount.com
   # resources:
   #   limits:
@@ -102,7 +102,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
-  controllerConfigRef:
-    name: upbound-gcp-provider
+  # controllerConfigRef:
+  #   name: upbound-gcp-provider
   package: xpkg.upbound.io/upbound/provider-gcp:v0.33.0
   # package: us-central1-docker.pkg.dev/test-app-384114/crossplane/crossplane:latest
