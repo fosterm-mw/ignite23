@@ -4,10 +4,10 @@ kind: ProviderConfig
 metadata:
   name: admin
 spec:
-  credentials:
-    source: InjectedIdentity
-    # impersonateServiceAccount:
-    #   name: 640263954415-compute@developer.gserviceaccount.com
-    #   # name: platform-admin-crossplane@test-app-384114.iam.gserviceaccount.com
-    # source: ImpersonateServiceAccount
   projectID: test-app-384114
+  credentials:
+    source: ImpersonateServiceAccount
+    impersonateServiceAccount:
+      name: platform-admin-crossplane@test-app-384114.iam.gserviceaccount.com
+    # source: InjectedIdentity
+      # name: 640263954415-compute@developer.gserviceaccount.com

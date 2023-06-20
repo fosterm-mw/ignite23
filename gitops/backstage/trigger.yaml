@@ -1,28 +1,28 @@
-# apiVersion: cloudbuild.gcp.upbound.io/v1beta1
-# kind: Trigger
-# metadata:
-#   name: backstage
-# spec:
-#   providerConfigRef:
-#     name: platform-admin
-#   forProvider:
-#     name: backstage-container
-#     filename: ./cloudbuild.yaml
-#     github:
-#     - name: mayo-backstage-dev
-#       owner: MavenWave-DevOps
-#       push:
-#       - branch: main
-
-apiVersion: cloudbuild.cnrm.cloud.google.com/v1beta1
-kind: CloudBuildTrigger
+apiVersion: cloudbuild.gcp.upbound.io/v1beta1
+kind: Trigger
 metadata:
-  name: dev-backstage-trigger
+  name: backstage
 spec:
-  disabled: false
-  triggerTemplate:
-    repoRef:
-      name: cloudbuildtrigger-dep-cloudsourcerepo
-    branchName: main
-  filename: "cloudbuild.yaml"
-  
+  providerConfigRef:
+    name: platform-admin
+  forProvider:
+    name: backstage-container
+    filename: ./cloudbuild.yaml
+    github:
+    - name: mayo-backstage-dev
+      owner: MavenWave-DevOps
+      push:
+      - branch: main
+#
+# apiVersion: cloudbuild.cnrm.cloud.google.com/v1beta1
+# kind: CloudBuildTrigger
+# metadata:
+#   name: dev-backstage-trigger
+# spec:
+#   disabled: false
+#   triggerTemplate:
+#     repoRef:
+#       name: cloudbuildtrigger-dep-cloudsourcerepo
+#     branchName: main
+#   filename: "cloudbuild.yaml"
+#   
