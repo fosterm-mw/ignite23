@@ -27,10 +27,10 @@ spec:
     parent: services/servicenetworking.googleapis.com
     reservedPeeringRanges: 
       - postgres
+    service: servicenetworking.googleapis.com
   writeConnectionSecretToRef:
     name: postgres-connection-ref
     namespace: backstage
-  service: servicenetworking.googleapis.com
 ---
 apiVersion: sql.gcp.upbound.io/v1beta1
 kind: DatabaseInstance
