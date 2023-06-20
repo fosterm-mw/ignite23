@@ -12,7 +12,8 @@ spec:
     readOnlyRootFilesystem: true
     runAsNonRoot: true
     runAsUser: 1000
-  serviceAccountName: 640263954415-compute@developer.gserviceaccount.com
+  serviceAccountName: 
+  # serviceAccountName: 640263954415-compute@developer.gserviceaccount.com
 ---
 apiVersion: pkg.crossplane.io/v1
 kind: Provider
