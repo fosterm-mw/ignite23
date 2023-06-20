@@ -37,9 +37,9 @@ spec:
     name: admin
   forProvider:
     serviceAccountIdRef:
-      name: platform-admin-crossplane
+      name: admin
     role: "roles/iam.serviceAccountTokenCreator"
-    member: serviceAccount:infra-tfe-sa@infra-tfe.iam.gserviceaccount.com
+    member: serviceAccount:platform-admin-crossplane@test-app-384114.iam.gserviceaccount.com
 
 ---
 apiVersion: cloudplatform.gcp.upbound.io/v1beta1
