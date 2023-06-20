@@ -6,7 +6,6 @@ namespace: crossplane-system
 resources:
   - upbound-gcp-provider.yaml
   - pvc.yaml
-# - gcp-provider.yaml
 
 helmCharts:
 - name: crossplane

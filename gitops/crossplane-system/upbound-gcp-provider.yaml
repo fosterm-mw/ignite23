@@ -86,7 +86,7 @@ spec:
     readOnlyRootFilesystem: true
     runAsNonRoot: true
     runAsUser: 1000
-  serviceAccountName: platform-admin-crossplane@test-app-384114.iam.gserviceaccount.com
+  # serviceAccountName: platform-admin-crossplane@test-app-384114.iam.gserviceaccount.com
   resources:
     limits:
       cpu: 2000m
