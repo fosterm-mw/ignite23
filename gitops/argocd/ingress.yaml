@@ -3,7 +3,8 @@ kind: ManagedCertificate
 metadata:
   name: google-cert
 spec:
-  domains: argocd.onecloud.igniteme.dev
+  domains: 
+  - argocd.onecloud.igniteme.dev
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
