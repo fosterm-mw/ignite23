@@ -53,7 +53,7 @@ spec:
         diskType: PD_SSD
         ipConfiguration:
         - ipv4Enabled: true
-          # privateNetwork: projects/test-app-384114/global/networks/primary-network
+          privateNetwork: projects/test-app-384114/global/networks/primary-network 
           allocatedIpRange: backstage-database 
           enablePrivatePathForGoogleCloudServices: true
         locationPreference:
