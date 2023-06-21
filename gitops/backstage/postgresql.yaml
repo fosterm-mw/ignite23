@@ -35,25 +35,25 @@ spec:
   # writeConnectionSecretToRef:
   #   name: postgres-connection-ref
   #   namespace: backstage
----
-apiVersion: sql.gcp.upbound.io/v1beta1
-kind: DatabaseInstance
-metadata:
-  name: backstage-database-instance
-spec:
-  deletionPolicy: Delete
-  providerConfigRef:
-    name: platform-admin
-  forProvider:
-    databaseVersion: POSTGRES_11
-    deletionProtection: false
-    region: us-central1
-    ipConfiguration:
-      ipv4Enabled: true
-      privateNetwork: projects/test-app-384114/global/networks/primary-network
-    settings:
-      - tier: db-f1-micro
-        diskType: PD_SSD
+# ---
+# apiVersion: sql.gcp.upbound.io/v1beta1
+# kind: DatabaseInstance
+# metadata:
+#   name: backstage-database-instance
+# spec:
+#   deletionPolicy: Delete
+#   providerConfigRef:
+#     name: platform-admin
+#   forProvider:
+#     databaseVersion: POSTGRES_11
+#     deletionProtection: false
+#     region: us-central1
+#     ipConfiguration:
+#       ipv4Enabled: true
+#       privateNetwork: projects/test-app-384114/global/networks/primary-network
+#     settings:
+#       - tier: db-f1-micro
+#         diskType: PD_SSD
 ---
 apiVersion: sql.gcp.upbound.io/v1beta1
 kind: Database
