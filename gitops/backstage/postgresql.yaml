@@ -55,6 +55,7 @@ spec:
         ipConfiguration:
         - ipv4Enabled: true
           privateNetwork: projects/test-app-384114/global/networks/primary-network
+          allocatedIpRange: backstage-database
 ---
 apiVersion: sql.gcp.upbound.io/v1beta1
 kind: Database
