@@ -45,18 +45,18 @@ spec:
   providerConfigRef:
     name: platform-admin
   forProvider:
-    databaseVersion: POSTGRES_11
+    databaseVersion: POSTGRES_13
     deletionProtection: false
     region: us-central1
     settings:
       - tier: db-f1-micro
         diskType: PD_SSD
-        # databaseFlags:
-        # - name: Connections
-        #   value: Private IP
         ipConfiguration:
         - ipv4Enabled: true
-          privateNetwork: projects/test-app-384114/global/networks/primary-network
+          # privateNetwork: projects/test-app-384114/global/networks/primary-network
+          privateNetworkSelector:
+            matchLabels:
+              projectx.upbound.io/address: backstage
           allocatedIpRange: servicenetworking-googleapis-com 
           enablePrivatePathForGoogleCloudServices: true
         locationPreference:
