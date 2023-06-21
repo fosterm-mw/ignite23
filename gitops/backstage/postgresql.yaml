@@ -6,6 +6,8 @@ metadata:
   labels:
     network.core.igniteme.dev/network-ref: backstage-db
 spec:
+  providerConfigRef:
+    name: platform-admin
   forProvider:
     autoCreateSubnetworks: false
     routingMode: GLOBAL
