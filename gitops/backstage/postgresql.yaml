@@ -51,13 +51,13 @@ spec:
     settings:
       - tier: db-f1-micro
         diskType: PD_SSD
-        databaseFlags:
-        - name: Connections
-          value: Private IP
+        # databaseFlags:
+        # - name: Connections
+        #   value: Private IP
         ipConfiguration:
         - ipv4Enabled: true
           privateNetwork: projects/test-app-384114/global/networks/primary-network
-          allocatedIpRange: backstage-database
+          allocatedIpRange: servicenetworking-googleapis-com 
           enablePrivatePathForGoogleCloudServices: true
         locationPreference:
           - zone: us-central1-a
