@@ -50,7 +50,8 @@ spec:
     region: us-central1
     ipConfiguration:
       ipv4Enabled: true
-      privateNetwork: projects/test-app-384114/global/networks/primary-network
+      # privateNetwork: projects/test-app-384114/global/networks/primary-network
+      privateNetwork: primary-network
     settings:
       - tier: db-f1-micro
         diskType: PD_SSD
