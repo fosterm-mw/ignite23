@@ -11,21 +11,21 @@ spec:
   forProvider:
     addressType: EXTERNAL
 ---
-# apiVersion: dns.gcp.upbound.io/v1beta1
-# kind: RecordSet
-# metadata:
-#   name: argocd-records
-#   annotations:
-#     crossplane.io/external-name: argocd-records
-# spec:
-#   deletionPolicy: Delete
-#   providerConfigRef:
-#     name: admin
-#   forProvider:
-#     managedZoneRef: 
-#       name: igniteme-dev
-#     name: argocd.onecloud.igniteme.dev.
-#     type: "A"
-#     rrdatas: 
-#       - "35.186.207.49"
-#     ttl: 86400
+apiVersion: dns.gcp.upbound.io/v1beta1
+kind: RecordSet
+metadata:
+  name: argocd-records
+  annotations:
+    crossplane.io/external-name: argocd-records
+spec:
+  deletionPolicy: Delete
+  providerConfigRef:
+    name: admin
+  forProvider:
+    managedZoneRef: 
+      name: igniteme-dev
+    name: argocd.onecloud.igniteme.dev.
+    type: "A"
+    rrdatas: 
+      - "34.120.180.20"
+    ttl: 86400
