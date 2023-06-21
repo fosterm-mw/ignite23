@@ -29,8 +29,8 @@ spec:
     reservedPeeringRangesSelector:
       matchLabels:
         projectx.upbound.io/address: backstage
-    # reservedPeeringRangesRefs: 
-    # - name: backstage-database
+    reservedPeeringRangesRefs: 
+    - name: backstage-database
     service: servicenetworking.googleapis.com
   # writeConnectionSecretToRef:
   #   name: postgres-connection-ref
