@@ -4,8 +4,8 @@ kind: Kustomization
 namespace: argocd
 
 resources:
-# - ingress.yaml
-- argocd_service_account.yaml
+- ingress.yaml
+# - argocd_service_account.yaml
 - dns.yaml
 # - secret_manager.yaml
 # - secret_store.yaml

@@ -3,7 +3,7 @@ kind: Kustomization
 
 resources:
 - admin.yaml
-# - argocd.yaml
+- argocd.yaml
 - backstage.yaml
 # - configconnector.yaml
 - crossplane-system.yaml
