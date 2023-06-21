@@ -56,7 +56,8 @@ spec:
           value: Private IP
         ipConfiguration:
         - ipv4Enabled: true
-          privateNetwork: projects/test-app-384114/global/networks/primary-network
+          privateNetworkRef: # projects/test-app-384114/global/networks/primary-network
+            name: primary-network
           # allocatedIpRange: backstage-database
           enablePrivatePathForGoogleCloudServices: true
         locationPreference:
