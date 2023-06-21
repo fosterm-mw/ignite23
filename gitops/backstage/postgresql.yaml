@@ -53,7 +53,7 @@ spec:
       - tier: db-f1-micro
         diskType: PD_SSD
         ipConfiguration:
-          ipv4Enabled: true
+        - ipv4Enabled: true
           privateNetwork: projects/test-app-384114/global/networks/primary-network
 ---
 apiVersion: sql.gcp.upbound.io/v1beta1
