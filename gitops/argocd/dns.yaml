@@ -22,8 +22,7 @@ spec:
   providerConfigRef:
     name: admin
   forProvider:
-    managedZoneRef: 
-      name: igniteme-dev
+    managedZone: igniteme-dev
     name: argocd.onecloud.igniteme.dev.
     type: "A"
     rrdatas: 
