@@ -1,40 +1,50 @@
 ---
 apiVersion: compute.gcp.upbound.io/v1beta1
+kind: Network
+metadata:
+  name: backstage-db-network
+  labels:
+    network.core.igniteme.dev/network-ref: backstage-db
+spec:
+  forProvider:
+    autoCreateSubnetworks: false
+    routingMode: GLOBAL
+
+---
+apiVersion: compute.gcp.upbound.io/v1beta1
 kind: GlobalAddress
 metadata:
-  name: backstage-database
+  name: backstage-address
   labels:
-    projectx.upbound.io/address: backstage
+    network.core.igniteme.dev/globalAddress-ref: backstage-db
 spec:
   providerConfigRef:
     name: platform-admin
   forProvider:
-    network: projects/test-app-384114/global/networks/primary-network
+    networkSelector:
+      matchLabels:
+        network.core.igniteme.dev/network-ref: backstage-db
     purpose: VPC_PEERING
     addressType: INTERNAL
     prefixLength: 16
-  writeConnectionSecretToRef:
-    name: postgres-connection-ref
-    namespace: backstage
+
 ---
 apiVersion: servicenetworking.gcp.upbound.io/v1beta1
 kind: Connection
 metadata:
-  name: backstage-connect
+  name: backstage-connection
 spec:
   providerConfigRef:
     name: platform-admin
   forProvider:
-    network: projects/test-app-384114/global/networks/primary-network
+    networkSelector:
+      matchLabels:
+        network.core.igniteme.dev/network-ref: backstage-db
     reservedPeeringRangesSelector:
       matchLabels:
-        projectx.upbound.io/address: backstage
-    reservedPeeringRangesRefs: 
-    - name: backstage-database
+        network.core.igniteme.dev/globalAddress-ref: backstage-db
     service: servicenetworking.googleapis.com
-  # writeConnectionSecretToRef:
-  #   name: postgres-connection-ref
-  #   namespace: backstage
+
 ---
 apiVersion: sql.gcp.upbound.io/v1beta1
 kind: DatabaseInstance
@@ -52,10 +62,10 @@ spec:
       - tier: db-f1-micro
         diskType: PD_SSD
         ipConfiguration:
-        - ipv4Enabled: true
-          privateNetwork: projects/test-app-384114/global/networks/primary-network 
-          allocatedIpRange: backstage-database 
-          enablePrivatePathForGoogleCloudServices: true
+        - ipv4Enabled: false
+          privateNetworkSelector: 
+            matchLabels:
+              network.core.igniteme.dev/network-ref: backstage-db
         locationPreference:
           - zone: us-central1-a
 ---
