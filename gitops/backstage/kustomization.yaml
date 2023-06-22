@@ -8,6 +8,7 @@ resources:
 # - project.yaml
 - trigger.yaml
 # - backstage-app.yaml
-- postgresql.yaml
+# - postgresql.yaml
 - apis.yaml
+- sidecar.yaml
 - deployment.yaml

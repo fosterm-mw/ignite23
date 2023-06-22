@@ -115,7 +115,7 @@ spec:
           - "/cloud_sql_proxy"
           - "-ip_address_types=PRIVATE"
           - "-log_debug_stdout"
-          - "-instances=test-app-384114:us-central1:backstage-database-instance=tcp:5432"
+          - "-instances=test-app-384114:us-central1:backstage-dev=tcp:5432"
         securityContext:
           runAsNonRoot: true
 
