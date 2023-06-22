@@ -14,8 +14,7 @@ spec:
       port:
         number: 7007
   rules:
-  - host: onecloud.igniteme.dev
-    http:
+  - http:
       paths:
       - path: /
         pathType: Prefix
