@@ -28,31 +28,31 @@ spec:
         - name: backstage
           containerPort: 7007
       env:
-        - name: GITHUB_CLIENT_ID
+        - name: ARGOCD_AUTH_TOKEN
           valueFrom:
             secretKeyRef:
               name: backstage-secrets
-              key: AUTH_GITHUB_CLIENT_ID
-        - name: GITHUB_CLIENT_SECRET
+              key: ARGOCD_AUTH_TOKEN
+        - name: BACKEND_SECRET
           valueFrom:
             secretKeyRef:
               name: backstage-secrets
-              key: AUTH_GITHUB_CLIENT_SECRET
-        - name: GITHUB_TOKEN
+              key: BACKEND_SECRET
+        - name: AZURE_TOKEN
           valueFrom:
             secretKeyRef:
               name: backstage-secrets
-              key: GITHUB_TOKEN
-        - name: AUTH_GOOGLE_CLIENT_ID 
+              key: AZURE_TOKEN
+        - name: GRAFANA_TOKEN 
           valueFrom:
             secretKeyRef:
               name: backstage-secrets
-              key: AUTH_GOOGLE_CLIENT_ID
-        - name: AUTH_GOOGLE_CLIENT_SECRET
+              key: GRAFANA_TOKEN
+        - name: MICROSOFT_CLIENT_SECRET
           valueFrom:
             secretKeyRef:
               name: backstage-secrets
-              key: AUTH_GOOGLE_CLIENT_SECRET
+              key: MICROSOFT_CLIENT_SECRET 
 
       - name: cloud-sql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.28.0
