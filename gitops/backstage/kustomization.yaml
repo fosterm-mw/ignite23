@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
 - secret.yaml
+- external-secrets.yaml
 # - rbac.yaml
 # - project.yaml
 - trigger.yaml
