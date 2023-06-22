@@ -1,0 +1,13 @@
+---
+apiVersion: compute.gcp.upbound.io/v1beta1
+kind: GlobalAddress
+metadata:
+  name: backstage-address
+  annotations:
+    crossplane.io/external-name: backstage-igniteme-dev-globalip
+spec:
+  deletionPolicy: Delete
+  providerConfigRef:
+    name: platform-admin
+  forProvider:
+    addressType: EXTERNAL
