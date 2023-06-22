@@ -1,0 +1,15 @@
+# Enabled Cloud SQL Admin API
+
+# Cloud SQL Client IAM
+---
+apiVersion: cloudplatform.gcp.upbound.io/v1beta1
+kind: ServiceAccountIAMMember
+metadata:
+  name: platform-admin-sidecar
+spec:
+  providerConfigRef:
+    name: platform-admin
+  forProvider:
+    project: test-app-384114
+    member: serviceAccount:platform-admin-crossplane@test-app-384114.iam.gserviceaccount.com
+    role: roles/cloudsql.client

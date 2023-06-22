@@ -78,6 +78,36 @@ spec:
             secretKeyRef:
               name: backstage-secrets
               key: K8S_URL
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: pg-db-secret
+              key: username
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: pg-db-secret
+              key: password
+        - name: POSTGRES_HOST
+          valueFrom:
+            secretKeyRef:
+              name: pg-db-secret
+              key: database
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: pg-db-secret
+              key: username
+        - name: DB_PASS
+          valueFrom:
+            secretKeyRef:
+              name: pg-db-secret
+              key: password
+        - name: DB_NAME
+          valueFrom:
+            secretKeyRef:
+              name: pg-db-secret
+              key: database
 
       - name: cloud-sql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.28.0
