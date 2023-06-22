@@ -12,3 +12,4 @@ resources:
 - apis.yaml
 - sidecar.yaml
 - deployment.yaml
+- service.yaml
