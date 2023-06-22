@@ -30,22 +30,22 @@ spec:
     addressType: INTERNAL
     prefixLength: 16
 
----
-apiVersion: servicenetworking.gcp.upbound.io/v1beta1
-kind: Connection
-metadata:
-  name: backstage-connection
-spec:
-  providerConfigRef:
-    name: platform-admin
-  forProvider:
-    networkSelector:
-      matchLabels:
-        network.core.igniteme.dev/network-ref: backstage-db
-    reservedPeeringRangesSelector:
-      matchLabels:
-        network.core.igniteme.dev/globalAddress-ref: backstage-db
-    service: servicenetworking.googleapis.com
+# ---
+# apiVersion: servicenetworking.gcp.upbound.io/v1beta1
+# kind: Connection
+# metadata:
+#   name: backstage-connection
+# spec:
+#   providerConfigRef:
+#     name: platform-admin
+#   forProvider:
+#     networkSelector:
+#       matchLabels:
+#         network.core.igniteme.dev/network-ref: backstage-db
+#     reservedPeeringRangesSelector:
+#       matchLabels:
+#         network.core.igniteme.dev/globalAddress-ref: backstage-db
+#     service: servicenetworking.googleapis.com
 
 ---
 apiVersion: sql.gcp.upbound.io/v1beta1
