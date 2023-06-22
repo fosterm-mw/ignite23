@@ -47,52 +47,52 @@ spec:
 #         network.core.igniteme.dev/globalAddress-ref: backstage-db
 #     service: servicenetworking.googleapis.com
 
----
-apiVersion: sql.gcp.upbound.io/v1beta1
-kind: DatabaseInstance
-metadata:
-  name: backstage-database-instance
-spec:
-  deletionPolicy: Delete
-  providerConfigRef:
-    name: platform-admin
-  forProvider:
-    databaseVersion: POSTGRES_13
-    deletionProtection: false
-    region: us-central1
-    settings:
-      - tier: db-f1-micro
-        diskType: PD_SSD
-        ipConfiguration:
-        - ipv4Enabled: false
-          privateNetworkSelector: 
-            matchLabels:
-              network.core.igniteme.dev/network-ref: backstage-db
-        locationPreference:
-          - zone: us-central1-a
----
-apiVersion: sql.gcp.upbound.io/v1beta1
-kind: Database
-metadata:
-  name: backstage-database
-spec:
-  providerConfigRef:
-    name: platform-admin
-  forProvider:
-    instanceRef:
-      name: backstage-database-instance
----
-apiVersion: sql.gcp.upbound.io/v1beta1
-kind: User
-metadata:
-  name: postgres
-spec:
-  providerConfigRef:
-    name: platform-admin
-  forProvider:
-    instanceRef:
-      name: backstage-database-instance
-    passwordSecretRef:
-      key: password
-      name: database-password
-      namespace: crossplane-system
+# ---
+# apiVersion: sql.gcp.upbound.io/v1beta1
+# kind: DatabaseInstance
+# metadata:
+#   name: backstage-database-instance
+# spec:
+#   deletionPolicy: Delete
+#   providerConfigRef:
+#     name: platform-admin
+#   forProvider:
+#     databaseVersion: POSTGRES_13
+#     deletionProtection: false
+#     region: us-central1
+#     settings:
+#       - tier: db-f1-micro
+#         diskType: PD_SSD
+#         ipConfiguration:
+#         - ipv4Enabled: false
+#           privateNetworkSelector: 
+#             matchLabels:
+#               network.core.igniteme.dev/network-ref: backstage-db
+#         locationPreference:
+#           - zone: us-central1-a
+# ---
+# apiVersion: sql.gcp.upbound.io/v1beta1
+# kind: Database
+# metadata:
+#   name: backstage-database
+# spec:
+#   providerConfigRef:
+#     name: platform-admin
+#   forProvider:
+#     instanceRef:
+#       name: backstage-database-instance
+# ---
+# apiVersion: sql.gcp.upbound.io/v1beta1
+# kind: User
+# metadata:
+#   name: postgres
+# spec:
+#   providerConfigRef:
+#     name: platform-admin
+#   forProvider:
+#     instanceRef:
+#       name: backstage-database-instance
+#     passwordSecretRef:
+#       key: password
+#       name: database-password
+#       namespace: crossplane-system
