@@ -11,3 +11,4 @@ spec:
     name: platform-admin
   forProvider:
     addressType: EXTERNAL
+
