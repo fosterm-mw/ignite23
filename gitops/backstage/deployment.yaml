@@ -82,17 +82,22 @@ spec:
           valueFrom:
             secretKeyRef:
               name: backstage-secrets
-              key: username
+              key: POSTGRES_USER
         - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
               name: backstage-secrets
-              key: password
+              key: POSTGRES_PASSWORD
         - name: POSTGRES_HOST
           valueFrom:
             secretKeyRef:
               name: backstage-secrets
-              key: database
+              key: POSTGRES_HOST
+        - name: POSTGRES_PORT
+          valueFrom:
+            secretKeyRef:
+              name: backstage-secrets
+              key: POSTGRES_PORT
         # - name: DB_USER
         #   valueFrom:
         #     secretKeyRef:
