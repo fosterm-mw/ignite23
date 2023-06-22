@@ -33,26 +33,51 @@ spec:
             secretKeyRef:
               name: backstage-secrets
               key: ARGOCD_AUTH_TOKEN
-        - name: BACKEND_SECRET
+        - name: AUTH_MICROSOFT_CLIENT_ID
           valueFrom:
             secretKeyRef:
               name: backstage-secrets
-              key: BACKEND_SECRET
-        - name: AZURE_TOKEN
+              key: AUTH_MICROSOFT_CLIENT_ID
+        - name: AUTH_MICROSOFT_TENANT_ID
           valueFrom:
             secretKeyRef:
               name: backstage-secrets
-              key: AZURE_TOKEN
-        - name: GRAFANA_TOKEN 
-          valueFrom:
-            secretKeyRef:
-              name: backstage-secrets
-              key: GRAFANA_TOKEN
+              key: AUTH_MICROSOFT_TENANT_ID
         - name: MICROSOFT_CLIENT_SECRET
           valueFrom:
             secretKeyRef:
               name: backstage-secrets
               key: MICROSOFT_CLIENT_SECRET 
+        - name: AZURE_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: backstage-secrets
+              key: AZURE_TOKEN
+        - name: BACKEND_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: backstage-secrets
+              key: BACKEND_SECRET
+        - name: GRAFANA_TOKEN 
+          valueFrom:
+            secretKeyRef:
+              name: backstage-secrets
+              key: GRAFANA_TOKEN
+        - name: K8S_CLUSTER_NAME 
+          valueFrom:
+            secretKeyRef:
+              name: backstage-secrets
+              key: K8S_CLUSTER_NAME
+        - name: K8S_SA_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: backstage-secrets
+              key: K8S_SA_TOKEN
+        - name: K8S_URL 
+          valueFrom:
+            secretKeyRef:
+              name: backstage-secrets
+              key: K8S_URL
 
       - name: cloud-sql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.28.0
