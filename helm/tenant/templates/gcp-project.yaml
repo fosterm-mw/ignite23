@@ -14,6 +14,7 @@ spec:
   forProvider:
     folderId: "182588266281"
     name: {{ $value.name }}-cloud-xpa
+    projectId: {{ $value.name }}-cloud-xpa
 
 ---
 apiVersion: cloudplatform.gcp.upbound.io/v1beta1
