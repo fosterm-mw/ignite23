@@ -4,32 +4,32 @@
 apiVersion: cloudplatform.gcp.upbound.io/v1beta1
 kind: Project
 metadata:
-  name: {{ $.value.name }}
+  name: {{ $value.name }}
   labels:
-    demo.igniteme.dev/tenant-project: {{ $.value.name }}
+    demo.igniteme.dev/tenant-project: {{ $value.name }}
 spec:
   providerConfigRef: 
     name: {{ $root.Values.providerConfigRef.name }}
   deletionPolicy: Delete
 forProvider:
   folderId: "182588266281"
-  name: {{ $.value.name }}-cloud-xpa
+  name: {{ $value.name }}-cloud-xpa
 
 ---
 apiVersion: cloudplatform.gcp.upbound.io/v1beta1
 kind: ProjectIAMMember
 metadata:
-  name: {{ $.value.name }}-owner
+  name: {{ $value.name }}-owner
   labels:
-    demo.igniteme.dev/tenant-owner: {{ $.value.name }}
+    demo.igniteme.dev/tenant-owner: {{ $value.name }}
 spec:
   providerConfigRef: 
     name: {{ $root.Values.providerConfigRef.name }}
   deletionPolicy: Delete
   projectSelector:
     matchLabels:
-      demo.igniteme.dev/tenant-project: {{ $.value.name }}
-  member: {{ $.value.gmail }}
+      demo.igniteme.dev/tenant-project: {{ $value.name }}
+  member: {{ $value.gmail }}
   role: "roles/Owner"
 
 {{- end }}
