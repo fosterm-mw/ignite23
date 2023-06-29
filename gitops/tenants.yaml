@@ -11,14 +11,13 @@ metadata:
 spec:
   project: operators
   source:
-    repoURL: https://github.com/MavenWave-DevOps/mw-charts.git
-    chart: tenant
-    # path: helm/tenant
-    targetRevision: 0.0.1
+    path: 'helm/tenant'
+    repoURL: https://github.com/fosterm-mw/ignite23.git
+    targetRevision: HEAD
     helm:
       releaseName: tenant
       valueFiles:
-      - "tenants/values.yaml"
+      - tenants/values.yaml
   # source:
   #   path: gitops/tenants
   destination:
