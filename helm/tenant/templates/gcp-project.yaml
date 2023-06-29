@@ -27,10 +27,11 @@ spec:
   providerConfigRef: 
     name: {{ $root.Values.providerConfigRef.name }}
   deletionPolicy: Delete
-  projectSelector:
-    matchLabels:
-      demo.igniteme.dev/tenant-project: {{ $value.name }}
-  member: {{ $value.gmail }}
-  role: "roles/Owner"
+  forProvider:
+    projectSelector:
+      matchLabels:
+        demo.igniteme.dev/tenant-project: {{ $value.name }}
+    member: {{ $value.gmail }}
+    role: "roles/Owner"
 
 {{- end }}
