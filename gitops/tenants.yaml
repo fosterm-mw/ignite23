@@ -15,13 +15,13 @@ spec:
     chart: tenant
     repository: "file://../helm/tenant/"
     version: 0.0.1
+    targetRevision: HEAD
     helm:
       releaseName: tenant
       valueFiles:
       - "tenants/values.yaml"
   # source:
   #   path: gitops/tenants
-  #   targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
     namespace: tenants
