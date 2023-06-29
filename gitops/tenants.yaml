@@ -11,10 +11,10 @@ metadata:
 spec:
   project: operators
   source:
-    repoURL: https://github.com/fosterm-mw/ignite23.git
+    # repoURL: https://github.com/fosterm-mw/ignite23.git
     chart: tenant
-    repository: "file://../helm/tenant/"
-    version: 0.0.1
+    directory: ../helm/tenants/
+    # version: 0.0.1
     targetRevision: 0.0.1
     helm:
       releaseName: tenant
