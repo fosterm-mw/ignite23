@@ -32,6 +32,6 @@ spec:
       matchLabels:
         demo.igniteme.dev/tenant-project: {{ $value.name }}
     member: {{ $value.gmail }}
-    role: "roles/Owner"
+    role: "roles/owner"
 
 {{- end }}
