@@ -17,7 +17,7 @@ spec:
     helm:
       releaseName: tenant
       valueFiles:
-      - tenants/values.yaml
+      - values.yaml
   # source:
   #   path: gitops/tenants
   destination:
