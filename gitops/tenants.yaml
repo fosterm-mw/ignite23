@@ -11,8 +11,8 @@ metadata:
 spec:
   project: operators
   source:
-    path: 'helm/tenant'
-    repoURL: https://github.com/fosterm-mw/ignite23.git
+    path: 'tenant'
+    repoURL: https://github.com/fosterm-mw/ignite-tenants.git
     targetRevision: HEAD
     helm:
       releaseName: tenant
