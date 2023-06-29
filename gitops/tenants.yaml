@@ -15,7 +15,7 @@ spec:
     chart: tenant
     repository: "file://../helm/tenant/"
     version: 0.0.1
-    targetRevision: HEAD
+    targetRevision: 0.0.1
     helm:
       releaseName: tenant
       valueFiles:
