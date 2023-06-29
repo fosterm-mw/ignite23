@@ -31,7 +31,7 @@ spec:
     projectSelector:
       matchLabels:
         demo.igniteme.dev/tenant-project: {{ $value.name }}
-    member: {{ $value.gmail }}
+    member: user:{{ $value.gmail }}
     role: roles/editor
 
 {{- end }}
