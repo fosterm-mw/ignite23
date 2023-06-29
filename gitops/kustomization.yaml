@@ -9,3 +9,4 @@ resources:
 - crossplane-system.yaml
 # - external-dns.yaml
 - external-secrets.yaml
+- tenants.yaml

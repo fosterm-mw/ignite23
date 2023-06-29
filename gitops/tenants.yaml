@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: tenants
+  namespace: argocd
+  labels:
+    deployment: helm
+    name: tenants
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+spec:
+  project: operators
+  source:
+    chart: tenant
+    repository: "file://../helm/tenant/"
+    version: 0.0.1
+    helm:
+      releaseName: tenant
+      valueFiles:
+      - "tenants/values.yaml"
+  # source:
+  #   repoURL: https://github.com/fosterm-mw/ignite23.git
+  #   path: gitops/tenants
+  #   targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: tenants
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
+    # syncOptions:
+    # - CreateNamespace=true

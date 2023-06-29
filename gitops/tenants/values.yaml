@@ -1,0 +1,9 @@
+providerConfigRef:
+  name: platform-admin
+
+tenant_groups:
+  - name: anay
+    gmail: anay.khandekar@mavenwave.com
+  # - name: test-analyst
+  #   gmail: joseph-cardenas@mavenwave.com
+

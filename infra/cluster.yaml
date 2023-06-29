@@ -37,7 +37,7 @@ spec:
         # nodeIpv4CidrBlock: 10.0.0.0/24
         servicesIpv4CidrBlock: 10.2.0.0/20
         # useIpAliases: true
-    initialNodeCount: 1
+    initialNodeCount: 3
     workloadIdentityConfig:
     - workloadPool: test-app-384114.svc.id.goog
     
@@ -63,7 +63,7 @@ spec:
       diskSizeGb: 50
       machineType: e2-standard-2
       spot: true
-    initialNodeCount: 1
+    initialNodeCount: 3
 
 ---
 apiVersion: kubernetes.crossplane.io/v1alpha1

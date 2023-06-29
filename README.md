@@ -16,3 +16,5 @@ gcloud iam service-accounts add-iam-policy-binding platform-admin-crossplane@tes
     --member="serviceAccount:test-app-384114.svc.id.goog[crossplane-system/upbound-gcp-provider-c2cb9007bb0b]" --role=roles/iam.serviceAccountTokenCreator \
     --format=json
 ```
+
+Portforward ArgoCD server
