@@ -11,10 +11,9 @@ metadata:
 spec:
   project: operators
   source:
-    repoURL: https://github.com/fosterm-mw/ignite23.git
+    repoURL: https://github.com/fosterm-mw/ignite23.git/helm/tenant
     chart: tenant
-    path: helm/tenant/
-    # version: 0.0.1
+    # path: helm/tenant
     targetRevision: 0.0.1
     helm:
       releaseName: tenant
