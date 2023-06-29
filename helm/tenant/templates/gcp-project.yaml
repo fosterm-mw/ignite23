@@ -11,9 +11,9 @@ spec:
   providerConfigRef: 
     name: {{ $root.Values.providerConfigRef.name }}
   deletionPolicy: Delete
-forProvider:
-  folderId: "182588266281"
-  name: {{ $value.name }}-cloud-xpa
+  forProvider:
+    folderId: "182588266281"
+    name: {{ $value.name }}-cloud-xpa
 
 ---
 apiVersion: cloudplatform.gcp.upbound.io/v1beta1
