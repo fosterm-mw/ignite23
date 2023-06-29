@@ -18,8 +18,6 @@ spec:
       releaseName: tenant
       valueFiles:
       - values.yaml
-  # source:
-  #   path: gitops/tenants
   destination:
     server: https://kubernetes.default.svc
     namespace: tenants
@@ -27,5 +25,3 @@ spec:
     automated:
       prune: false
       selfHeal: true
-    # syncOptions:
-    # - CreateNamespace=true
