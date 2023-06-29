@@ -13,7 +13,7 @@ spec:
   source:
     repoURL: https://github.com/fosterm-mw/ignite23.git
     chart: tenant
-    path: helm/tenants/
+    path: helm/tenant/
     # version: 0.0.1
     targetRevision: 0.0.1
     helm:
