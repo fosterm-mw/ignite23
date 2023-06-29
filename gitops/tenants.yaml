@@ -11,6 +11,7 @@ metadata:
 spec:
   project: operators
   source:
+    repoURL: https://github.com/fosterm-mw/ignite23.git
     chart: tenant
     repository: "file://../helm/tenant/"
     version: 0.0.1
@@ -19,7 +20,6 @@ spec:
       valueFiles:
       - "tenants/values.yaml"
   # source:
-  #   repoURL: https://github.com/fosterm-mw/ignite23.git
   #   path: gitops/tenants
   #   targetRevision: HEAD
   destination:
