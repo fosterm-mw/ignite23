@@ -93,6 +93,9 @@ ifneq ($(wildcard ${KUBECTL}), ${KUBECTL})
 	chmod +x ${KUBECTL}
 endif
 
+install_kind:
+	@go install sigs.k8s.io/kind@v0.19.0
+
 install_k3d: directories
 ifneq ($(wildcard ${K3D}), ${K3D})
 	$(K3D_DOWNLOAD) ;\
@@ -110,7 +113,7 @@ endif
 
 ## Install crossplane onto K3D cluster
 install_crossplane: install_helm
-	${HELM} upgrade --install --repo https://charts.crossplane.io/stable --version 1.10.1 --create-namespace --namespace crossplane-system crossplane crossplane --values ${MKFILEDIR}helm/crossplane/values.yaml --wait
+	${HELM} upgrade --install --repo https://charts.crossplane.io/stable --version 1.13.0 --create-namespace --namespace crossplane-system crossplane crossplane --values ${MKFILEDIR}helm/crossplane/values.yaml --wait
 
 ## Install Crossplane providers
 create_providers: install_kubectl
@@ -142,6 +145,8 @@ setup: create_provider_secret create_providerconfigs
 create_bootstrap_cluster:
 	${KUBECTL} apply -f ${MKFILEDIR}infra ;\
 
+all: create_dev_cluster install_crossplane create_provider_secret create_providerconfigs create_providers
+
 ## Destroy local devlopment cluster
 destroy: destroy_dev_cluster
 
@@ -152,15 +157,15 @@ clean_all: destroy
 ## Local Development
 .PHONY: create_dev_cluster
 ## Create local dev cluster
-create_dev_cluster: install_k3d
-	${K3D} cluster create ${DEV_CLUSTER} --no-lb  --k3s-arg --disable=traefik@server:* || true
+create_dev_cluster: install_kind
+	@kind create cluster -n ${DEV_CLUSTER}
 
 .PHONY: local_dev
 local_dev: install_kubectl create_dev_cluster local_bootstrap
 
 .PHONY: destroy_dev_cluster
 destroy_dev_cluster:
-	@k3d cluster delete ${DEV_CLUSTER}
+	@kind delete cluster -n ${DEV_CLUSTER}
 
 .PHONY: create_infra
 create_infra:

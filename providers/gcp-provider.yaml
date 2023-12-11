@@ -1,7 +1,7 @@
+---
 apiVersion: pkg.crossplane.io/v1
 kind: Provider
 metadata:
-  name: upbound-provider-gcp
+  name: provider-gcp-compute
 spec:
-  package: xpkg.upbound.io/upbound/provider-gcp:v0.30.0
-
+  package: xpkg.upbound.io/upbound/provider-gcp-compute:v0.39.0
